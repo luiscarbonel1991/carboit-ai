@@ -22,9 +22,6 @@ export const dbConnect = async () => {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             bufferCommands: false,
-            bufferMaxEntries: 0,
-            useFindAndModify: false,
-            useCreateIndex: true,
         } as ConnectOptions;
 
         cache.promise = mongoose.connect(MONGODB_URL, opts).then((mongoose) => {
