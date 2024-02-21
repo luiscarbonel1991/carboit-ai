@@ -15,7 +15,7 @@ export const MainNav = () => {
     return (
         <nav className="md:ml-auto justify-end  w-full flex items-center gap-x-2">
 
-            <NavList pathname={pathname} navItems={mainNav} />
+            {/* <NavList pathname={pathname} navItems={mainNav} /> */}
 
             <UserButton />
 

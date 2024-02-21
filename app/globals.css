@@ -74,7 +74,3 @@
     @apply bg-background text-foreground;
   }
 }
-
-.root {
-  @apply flex min-h-screen w-full flex-col bg-background lg:flex-row;
-}

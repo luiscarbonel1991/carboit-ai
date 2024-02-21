@@ -45,7 +45,35 @@ export const navConfig: NavConfig = {
             items: [
                 {
                     title: "Background Remover",
-                    href: "/images/add/remove-background",
+                    href: "/images/add/removeBackground",
+                    lucideIcon: ImagesIcon,
+                    items: [],
+                    disabled: false
+                },
+                {
+                    title: "Restore Image",
+                    href: "/images/add/restore",
+                    lucideIcon: ImagesIcon,
+                    items: [],
+                    disabled: false
+                },
+                {
+                    title: "Generative Fill",
+                    href: "/images/add/fill",
+                    lucideIcon: ImagesIcon,
+                    items: [],
+                    disabled: false
+                },
+                {
+                    title: "Object Remove",
+                    href: "/images/add/remove",
+                    lucideIcon: ImagesIcon,
+                    items: [],
+                    disabled: false
+                },
+                {
+                    title: "Object Recolor",
+                    href: "/images/add/recolor",
                     lucideIcon: ImagesIcon,
                     items: [],
                     disabled: false

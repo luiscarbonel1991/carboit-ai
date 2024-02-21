@@ -4,14 +4,9 @@ import { CameraIcon } from "lucide-react"
 import Link from "next/link"
 import { Button } from "../ui/button"
 import { usePathname } from "next/navigation"
+import { getNavConfig } from "@/config/nav-config";
 
-const imageTools = [
-    {
-        label: "Background remove",
-        link: "/images/add/remove-background",
-        icon: CameraIcon
-    }
-]
+const imageTools = getNavConfig().sidebar.filter((item) => item.href === "/images")[0].items
 
 
 const Sidebar = () => {
@@ -21,17 +16,17 @@ const Sidebar = () => {
         <aside className="hidden h-screen w-72 bg-background p-5 shadow-md shadow-purple-200/50 lg:flex">
 
             <nav className="h-full flex-col justify-between md:flex md:gap-4">
-                <ul className="hidden w-full flex-col items-start gap-2 md:flex">
+                <ul className="hidden w-full flex-col items-start gap-6 md:flex">
                     {imageTools.map((tool, index) => {
-                        const isActive = tool.link === pathname
+                        const isActive = tool.href === pathname
                         return (
-                            <li key={tool.link}>
-                                <Link href={tool.link}>
-                                    <Button className="flex gap-4" size={"lg"}
+                            <li className="w-full transition duration-300 hover:scale-105" key={tool.href}>
+                                <Link href={tool.href || '/'}>
+                                    <Button className="flex gap-4 w-full rounded-3xl" size={"lg"}
                                     variant={isActive ? "default" : "outline"}
                                     >
-                                        <tool.icon className="w-6 h-6" />
-                                        <span>{tool.label}</span>
+                                        { tool.lucideIcon && <tool.lucideIcon size={24} />}
+                                        <span>{tool.title}</span>
                                     </Button>
                                 </Link>
                             </li>
