@@ -15,17 +15,10 @@ export interface NavItemWithChildren extends NavItem {
     items: NavItemWithChildren[]
 }
 
-export interface NavItemWithChildrenV2 extends NavItem {
-    items: NavItemWithChildrenV2[]
-    lucideIcon?: LucideIcon
-}
 
 export interface MainNavItem extends NavItem {
 }
 
 export interface SidebarNavItem extends NavItemWithChildren {
-}
-
-export interface SidebarNavItemV2 extends NavItemWithChildrenV2 {
-    lucideIcon?: LucideIcon
+    
 }
