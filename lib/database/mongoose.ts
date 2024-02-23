@@ -19,8 +19,6 @@ export const dbConnect = async () => {
     if(!cache.promise) {
         const opts = {
             dbName: 'carbo-ai',
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
             bufferCommands: false,
         } as ConnectOptions;
 

@@ -1,5 +1,5 @@
 import {MainNavItem, SidebarNavItem} from "@/types/nav"
-import { ImagesIcon } from "lucide-react";
+import { HomeIcon, ImageOffIcon, ImagesIcon, LayersIcon, PaletteIcon, RotateCcwIcon, ScissorsIcon, Wand2 } from "lucide-react";
 import {LuSettings2} from "react-icons/lu";
 
 interface NavConfig {
@@ -44,37 +44,44 @@ export const navConfig: NavConfig = {
             disabled: false,
             items: [
                 {
+                    title: "Home",
+                    href: "/images",
+                    lucideIcon: HomeIcon,
+                    items: [],
+                    disabled: false
+                },
+                {
                     title: "Background Remover",
                     href: "/images/add/removeBackground",
-                    lucideIcon: ImagesIcon,
+                    lucideIcon: LayersIcon,
                     items: [],
                     disabled: false
                 },
                 {
                     title: "Restore Image",
                     href: "/images/add/restore",
-                    lucideIcon: ImagesIcon,
+                    lucideIcon: RotateCcwIcon,
                     items: [],
                     disabled: false
                 },
                 {
                     title: "Generative Fill",
                     href: "/images/add/fill",
-                    lucideIcon: ImagesIcon,
+                    lucideIcon: Wand2,
                     items: [],
                     disabled: false
                 },
                 {
                     title: "Object Remove",
                     href: "/images/add/remove",
-                    lucideIcon: ImagesIcon,
+                    lucideIcon: ScissorsIcon,
                     items: [],
                     disabled: false
                 },
                 {
                     title: "Object Recolor",
                     href: "/images/add/recolor",
-                    lucideIcon: ImagesIcon,
+                    lucideIcon: PaletteIcon,
                     items: [],
                     disabled: false
                 }

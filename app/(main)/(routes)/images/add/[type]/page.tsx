@@ -1,7 +1,9 @@
 import HeaderContent from "@/components/header-content";
 import ImageTransformationForm from "@/components/images/image-transformation-form";
+import InsuficientCreditModal from "@/components/insufficient-credit-modal";
 import { imageTransformationTypes } from "@/config/links";
 import { findUserBy } from "@/lib/actions/user.action";
+import { SearchParamProps, TransformationTypeKey } from "@/types/image-transformation";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 

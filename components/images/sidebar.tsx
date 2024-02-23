@@ -5,6 +5,7 @@ import Link from "next/link"
 import { Button } from "../ui/button"
 import { usePathname } from "next/navigation"
 import { getNavConfig } from "@/config/nav-config";
+import { cn } from "@/lib/utils";
 
 const imageTools = getNavConfig().sidebar.filter((item) => item.href === "/images")[0].items
 
@@ -22,11 +23,16 @@ const Sidebar = () => {
                         return (
                             <li className="w-full transition duration-300 hover:scale-105" key={tool.href}>
                                 <Link href={tool.href || '/'}>
-                                    <Button className="flex gap-4 w-full rounded-3xl" size={"lg"}
+                                    <Button className={
+                                        cn(
+                                            "flex justify-start gap-4 w-full rounded-3xl",
+                                            isActive ? "bg-gradient-to-b from-gray-900 to-gray-600" : ""
+                                        )
+                                    } size={"lg"}
                                     variant={isActive ? "default" : "outline"}
                                     >
                                         { tool.lucideIcon && <tool.lucideIcon size={24} />}
-                                        <span>{tool.title}</span>
+                                        <span >{tool.title}</span>
                                     </Button>
                                 </Link>
                             </li>

@@ -75,3 +75,23 @@ export const deleteUser = async (clerkId: string) => {
         handleError(error);
     }
 }
+
+export const updateUserCreditBalance = async (id: string, creditBalanceFee: number) => {
+    try {
+        await dbConnect();
+
+        const updatedUser = await User.findOneAndUpdate(
+            { _id: id},
+            { $inc: { creditBalance: creditBalanceFee }},
+            { new: true }
+        );
+
+        if (!updatedUser) {
+            throw new Error('User not found');
+        }
+
+        return JSON.parse(JSON.stringify(updatedUser));
+    } catch (error) {
+        handleError(error);
+    }
+}

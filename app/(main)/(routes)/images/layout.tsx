@@ -17,8 +17,6 @@ const ImagesLayout = ({ children }: ImagesLayoutProps) => {
                     {children}
                 </div>
             </div>
-
-            {/* <Toaster /> */}
         </main>
     )
 
