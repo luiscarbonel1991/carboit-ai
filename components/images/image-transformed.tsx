@@ -9,6 +9,7 @@ import { Loader2 } from "lucide-react";
 import { CldImage, getCldImageUrl } from "next-cloudinary";
 import { dataUrl, debounce, download, getImageSize } from "@/lib/utils";
 import { PlaceholderValue } from "next/dist/shared/lib/get-img-props";
+import Image from "next/image";
 
 
 
@@ -30,7 +31,10 @@ const ImageTransformed = (
     return (
         <div className="flex flex-col gap-4">
             <div className="flex justify-between">
-                <HeaderContent title="Transformed" />
+                <HeaderContent 
+                title="Transformed" 
+                titleClassName="md:text-3xl font-semibold text-dark-900"
+                />
 
                 {hasDownload && (
                     <Button
@@ -60,6 +64,8 @@ const ImageTransformed = (
                             setIsTransforming && setIsTransforming(false);
                         }}
                         onError={() => {
+                            console.log("Error loading image");
+
                             debounce(() => {
                                 setIsTransforming && setIsTransforming(false);
                             }, 8000)()
@@ -68,10 +74,15 @@ const ImageTransformed = (
                     />
 
                     {isTransforming && (
-                        <div className="flex flex-col justify-center items-center gap-4">
-                            <Loader2 className="animate-spin h-10 w-10 text-white/80" />
-                            <p className="text-white/80">Please wait...</p>
-                        </div>
+                        <div className="flex justify-center items-center absolute left-[50%] top-[50%] size-full -translate-x-1/2 -translate-y-1/2 flex-col gap-2 rounded-[10px] border bg-dark-700/90">
+                        <Image 
+                          src="/static/assets/icons/spinner.svg"
+                          width={50}
+                          height={50}
+                          alt="spinner"
+                        />
+                        <p className="text-white/80">Please wait...</p>
+                      </div>
                     )}
                 </div>
             ) : (

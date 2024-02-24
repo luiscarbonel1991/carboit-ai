@@ -1,6 +1,5 @@
 "use client";
 
-import { CameraIcon } from "lucide-react"
 import Link from "next/link"
 import { Button } from "../ui/button"
 import { usePathname } from "next/navigation"
@@ -26,7 +25,7 @@ const Sidebar = () => {
                                     <Button className={
                                         cn(
                                             "flex justify-start gap-4 w-full rounded-3xl",
-                                            isActive ? "bg-gradient-to-b from-gray-900 to-gray-600" : ""
+                                            isActive ? "bg-gradient-to-r from-blue-500 to-indigo-500" : ""
                                         )
                                     } size={"lg"}
                                     variant={isActive ? "default" : "outline"}

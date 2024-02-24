@@ -1,55 +1,47 @@
 "use client";
 
-import {Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog";
-import {useToast} from "@/components/ui/use-toast";
-import {Badge} from "@/components/ui/badge";
-import {Button} from "@/components/ui/button";
-import { Zap } from "lucide-react";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { CoinsIcon, Zap } from "lucide-react";
 import { useInsuficientCreditModal } from "@/hooks/use-insufficient-credit-modal";
 
 
-const InsuficientCreditModal = () => {
-
-    const { toast } = useToast();
+const InsuficientCreditModal = ({
+    forceOpen
+}: { forceOpen?: boolean}) => {
     const insufficientCreditModal = useInsuficientCreditModal();
 
     return (
-        <Dialog open={insufficientCreditModal.isOpen} onOpenChange={insufficientCreditModal.onClose}>
-            <DialogContent>
+        <Dialog open={forceOpen || insufficientCreditModal.isOpen} onOpenChange={insufficientCreditModal.onClose}>
+            <DialogContent className="space-y-4">
                 <DialogHeader>
-                    <DialogTitle className="flex justify-center items-center flex-col gap-y-4 pb-2">
-                        <div className="flex items-center gap-x-2 font-bold text-xl">
-                            By more credits
-                            <Badge  className="uppercase text-sm py-1">
-                                pro
+                    <DialogTitle>
+                        <div className="flex gap-x-2 font-bold text-xl">
+                            Opps! You don&#39;t have enough credits
+                            <Badge className="uppercase text-sm py-1">
+                                <CoinsIcon className="w-6 h-6 mr-1" />
                             </Badge>
                         </div>
                     </DialogTitle>
-                    {/* <DialogHeader className="text-center pt-2 space-y-2 text-zinc-900 font-medium">
-                        {tools.map((tool) => (
-                            <Link
-                                href={tool.link}
-                                key={tool.link}
-                            >
-                                <Card className="p-3 border-black/5 flex items-center justify-between">
-                                    <div className="flex items-center gap-x-4">
-                                        <div className={cn("p-2 w-fit rounded-md", tool.bgColor)}>
-                                            <tool.icon className={cn("w-6 h-6", tool.color)}/>
-                                        </div>
-                                        <div className="font-semibold text-sm">
-                                            {tool.name}
-                                        </div>
-                                    </div>
-                                    <Check className="text-primary w-5 h-5"/>
-                                </Card>
-                            </Link>
-                        ))}
-                    </DialogHeader> */}
+
+                    <DialogDescription>
+                        You need more credits to perform this action
+                    </DialogDescription>
                 </DialogHeader>
-                <DialogFooter>
-                    <Button className="w-full">
-                        By more credits
-                        <Zap className="w-5 h-5 ml-2"/>
+
+                <DialogFooter className="sm:justify-between">
+                    <Button
+                        className="rounded-full"
+                        variant={"secondary"}
+                    >
+                        No, thanks
+                    </Button>
+                    <Button
+                        className="rounded-full"
+                    >
+                        Yes, Proceed
                     </Button>
                 </DialogFooter>
             </DialogContent>

@@ -67,8 +67,7 @@ const CloudinaryMediaUploader = ({
                 uploadPreset="carboi_ai"
                 options={{
                     multiple: false,
-                    resourceType: "image",
-                    sources: ["local", "url", "unsplash"],
+                    resourceType: "image"
                 }}
                 onSuccess={onUploadSuccessHandler}
                 onError={onUploadErrorHandler}
@@ -79,6 +78,7 @@ const CloudinaryMediaUploader = ({
                         <div className="flex flex-col gap-4">
                             <HeaderContent
                                 title="Original"
+                                titleClassName="md:text-3xl font-semibold text-dark-900"
                             />
 
                             {publicId ? (

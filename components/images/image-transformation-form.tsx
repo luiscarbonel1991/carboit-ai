@@ -5,16 +5,9 @@ import { useForm } from "react-hook-form"
 
 import { Button } from "@/components/ui/button"
 import {
-    Form,
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
+    Form
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { IImage } from "@/lib/database/models/image.model"
 import { ImageTransformationCustomField } from "../form/image-transformation-custom-field"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
 import { useEffect, useState, useTransition } from "react"
@@ -34,9 +27,12 @@ import { updateUserCreditBalance } from "@/lib/actions/user.action"
 import { getCldImageUrl } from "next-cloudinary"
 import { addImage, updateImage } from "@/lib/actions/image.action"
 import { useInsuficientCreditModal } from "@/hooks/use-insufficient-credit-modal"
-import { set } from "mongoose"
+import InsuficientCreditModal from "../insufficient-credit-modal"
+import dynamic from "next/dynamic"
 
-
+const InsufficientCreditModalWithNoSSR = dynamic(() => import("@/components/insufficient-credit-modal"), {
+    ssr: false,
+  });
 
 const defaultValues = {
     title: "",
@@ -77,7 +73,7 @@ const ImageTransformationForm = ({ action, data = null, userId, type, creditBala
 
     const onSelectFieldHandler = (value: string, onChangeField: (value: string) => void) => {
 
-        checkCredit()
+       // checkCredit()
 
         const imageSize = aspectRatioOptions[value as AspectRatioKey]
 
@@ -136,7 +132,7 @@ const ImageTransformationForm = ({ action, data = null, userId, type, creditBala
 
     const onSubmit = async (values: ImageTransformationFormValues) => {
 
-        checkCredit()
+        //checkCredit()
 
         if (!image) return
 
@@ -211,22 +207,22 @@ const ImageTransformationForm = ({ action, data = null, userId, type, creditBala
         }
     }, [image, transformationType.config, type])
 
-    useEffect(() => {
-        checkCredit()
-    }, [creditBalance])
+    // useEffect(() => {
+    //     checkCredit()
+    // }, [creditBalance])
 
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-
-
+            
+                { creditBalance < 1 && <InsufficientCreditModalWithNoSSR forceOpen={true}/> }
           
                 <ImageTransformationCustomField
                     control={form.control}
                     name="title"
                     formLabel="Image Title"
                     className="w-full"
-                    render={({ field }) => <Input {...field} className="input-field" />}
+                    render={({ field }) => <Input {...field} className="p-6 ps-10" />}
                 />
 
                 {type === 'fill' && (
@@ -240,12 +236,12 @@ const ImageTransformationForm = ({ action, data = null, userId, type, creditBala
                                 onValueChange={(value) => onSelectFieldHandler(value, field.onChange)}
                                 value={field.value}
                             >
-                                <SelectTrigger className="select-field">
+                                <SelectTrigger className="w-full border-2 border-indigo-200/20 shadow-sm shadow-indigo-200/15 rounded-[16px] h-[50px] md:h-[54px] text-dark-600 p-16-semibold disabled:opacity-100 placeholder:text-dark-400/50 px-4 py-3 focus:ring-offset-0 focus-visible:ring-transparent focus:ring-transparent focus-visible:ring-0 focus-visible:outline-none !important">
                                     <SelectValue placeholder="Select size" />
                                 </SelectTrigger>
                                 <SelectContent>
                                     {Object.keys(aspectRatioOptions).map((key) => (
-                                        <SelectItem key={key} value={key} className="select-item">
+                                        <SelectItem key={key} value={key} className="py-3 cursor-pointer hover:bg-indigo-100">
                                             {aspectRatioOptions[key as AspectRatioKey].label}
                                         </SelectItem>
                                     ))}
@@ -256,7 +252,7 @@ const ImageTransformationForm = ({ action, data = null, userId, type, creditBala
                 )}
 
                 {(type === 'remove' || type === 'recolor') && (
-                    <div className="prompt-field">
+                    <div className="flex flex-col gap-5 lg:flex-row lg:gap-10">
                         <ImageTransformationCustomField
                             control={form.control}
                             name="prompt"
@@ -266,6 +262,7 @@ const ImageTransformationForm = ({ action, data = null, userId, type, creditBala
                             className="w-full"
                             render={({ field }) => (
                                 <Input
+                                    
                                     value={field.value}
                                     className="input-field"
                                     onChange={(e) => onInputChangeHandler(
@@ -328,12 +325,6 @@ const ImageTransformationForm = ({ action, data = null, userId, type, creditBala
                         transformationConfig={transformationConfig}    
                     />
                 </div>
-
-
-                <div className="flex flex-col gap-4">
-                    <span>{JSON.stringify(image)}</span>
-                    </div>
-
 
                 <div className="flex flex-col gap-4">
                     <Button

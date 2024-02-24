@@ -31,7 +31,6 @@ const AddImageTransformationType = async (
                 type={imageTransformationType.type as TransformationTypeKey}
                 userId={user._id}
                 creditBalance={user.creditBalance}
-                config={imageTransformationType.config}
             />
         </section>
         </>
