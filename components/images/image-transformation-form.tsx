@@ -215,7 +215,7 @@ const ImageTransformationForm = ({ action, data = null, userId, type, creditBala
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             
-                { creditBalance < 1 && <InsufficientCreditModalWithNoSSR forceOpen={true}/> }
+                <InsufficientCreditModalWithNoSSR forceOpen={creditBalance < 1} />
           
                 <ImageTransformationCustomField
                     control={form.control}

@@ -6,11 +6,12 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { CoinsIcon, Zap } from "lucide-react";
 import { useInsuficientCreditModal } from "@/hooks/use-insufficient-credit-modal";
+import Link from "next/link";
 
 
 const InsuficientCreditModal = ({
     forceOpen
-}: { forceOpen?: boolean}) => {
+}: { forceOpen?: boolean }) => {
     const insufficientCreditModal = useInsuficientCreditModal();
 
     return (
@@ -32,17 +33,25 @@ const InsuficientCreditModal = ({
                 </DialogHeader>
 
                 <DialogFooter className="sm:justify-between">
-                    <Button
-                        className="rounded-full"
-                        variant={"secondary"}
+                    <Link href="/profile"
+                    aria-label="Go to profile"
                     >
-                        No, thanks
-                    </Button>
-                    <Button
-                        className="rounded-full"
+                        <Button
+                            className="rounded-full"
+                            variant={"secondary"}
+                        >
+                            No, thanks
+                        </Button>
+                    </Link>
+                    <Link href="/pricing"
+                    aria-label="Go to credits"
                     >
-                        Yes, Proceed
-                    </Button>
+                        <Button
+                            className="rounded-full"
+                        >
+                            Yes, Proceed
+                        </Button>
+                    </Link>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
